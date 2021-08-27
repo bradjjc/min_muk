@@ -14,6 +14,14 @@ class VideoScreen extends StatefulWidget {
 class _VideoScreenState extends State<VideoScreen> {
 
   YoutubePlayerController _controller;
+  // YoutubePlayerController _controller = YoutubePlayerController(
+  //   initialVideoId: 'iLnmTe5Q2Qw',
+  //   flags: YoutubePlayerFlags(
+  //     autoPlay: true,
+  //     mute: true,
+  //   ),
+  // );
+
 
   @override
   void initState() {
@@ -21,10 +29,12 @@ class _VideoScreenState extends State<VideoScreen> {
     _controller = YoutubePlayerController(
       initialVideoId: widget.id,
       flags: YoutubePlayerFlags(
-        mute: true,
+        mute: false,
         autoPlay: true,
+        loop: true,
       ),
     );
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Plays the video once the widget is build and loaded.
       _controller.play();
@@ -65,6 +75,7 @@ class _VideoScreenState extends State<VideoScreen> {
         child: YoutubePlayer(
           controller: _controller,
           showVideoProgressIndicator: true,
+
           onReady: () {
             print('Player is ready.');
           },
